@@ -29,11 +29,13 @@ Implements tasks from an approved spec with configurable implementation and revi
 | Max review iterations | `5` | 1-10 |
 | Worktree base path | `.worktrees/` | Any path (gitignored recommended) |
 | Branch prefix | `impl/` | Any prefix |
+| Auto-approve task breakdown | `false` | `true`, `false` |
 
 Override by saying:
 - "Use claude for implementation and codex for review"
 - "Set max review iterations to 3"
 - "Use branch prefix `feature/`"
+- "Auto-approve task breakdowns" or "Don't ask about task breakdown"
 
 ## Task Format in Specs
 
@@ -130,6 +132,73 @@ Task 2: "Add input validation" [pending]
 Task 3: "Set up project structure" [complete, skip]
 Task 4: "Write integration tests" [pending]
 ```
+
+## Phase 1b: Task Breakdown (if needed)
+
+If the spec lacks explicit checklist tasks (`- [ ]` format), generate them from the spec content.
+
+### Step 1: Analyze spec structure
+
+Look for implementable units:
+- Numbered steps in "Approach" or "Implementation" sections
+- Distinct features or components described
+- Logical boundaries (backend/frontend, by endpoint, by module)
+
+### Step 2: Generate checklist
+
+Create tasks at appropriate granularity:
+- Each task should be completable in one worktree session
+- Tasks should be independently testable where possible
+- Order tasks by dependency (foundations first)
+
+### Step 3: Approval (configurable)
+
+**If `auto_approve_breakdown` is `false` (default):**
+
+```
+📋 No explicit tasks found in spec. Proposed breakdown:
+
+## Tasks
+- [ ] Set up OAuth2 provider interface
+- [ ] Implement token storage schema
+- [ ] Add callback endpoint
+- [ ] Implement token refresh logic
+- [ ] Add integration tests
+
+Options:
+1. Accept this breakdown
+2. Edit (provide your own task list)
+3. Specify different granularity (more/fewer tasks)
+```
+
+Wait for user confirmation before proceeding.
+
+**If `auto_approve_breakdown` is `true`:**
+
+```
+📋 No explicit tasks found in spec. Auto-generated breakdown:
+
+## Tasks
+- [ ] Set up OAuth2 provider interface
+- [ ] Implement token storage schema
+- [ ] Add callback endpoint
+- [ ] Implement token refresh logic
+- [ ] Add integration tests
+
+Proceeding with implementation...
+```
+
+### Step 4: Commit breakdown to spec
+
+Add the tasks to the spec file and commit:
+
+```bash
+# Edit spec to add Tasks section
+git add specs/feature.md
+git commit -m "Add task breakdown for: [spec name]"
+```
+
+This ensures the breakdown is versioned and visible to other workers.
 
 ## Phase 2: Claim Task and Set Up Worktree
 
