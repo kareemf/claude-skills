@@ -1,6 +1,11 @@
-# My Claude Code Skills
+# My ~Claude Code~ Agent Skills
 
-Collection of personal Claude Code skills. Feel free to use, no warranty.
+Collection of personal agent-agnostic skills. Feel free to use, no warranty.
+These skills are compatible with:
+* Claude (via the Claude skills directory)
+* Codex (via the Codex skills directory)
+* Other agents that support the same [skills specification](https://developers.openai.com/codex/skills/)
+
 
 ## Skills
 
@@ -11,10 +16,22 @@ Collection of personal Claude Code skills. Feel free to use, no warranty.
 
 ## Installation
 ```bash
-# Clone and symlink
-git clone https://github.com/yourname/claude-skills.git ~/claude-skills
-ln -s ~/claude-skills ~/.claude/skills
+# Clone
+git clone https://github.com/kareemf/claude-skills.git ~/claude-skills
 
-# Or cherry-pick one skill
+# Ensure skills directories exist (they should already)
+mkdir -p ~/.claude/skills
+mkdir -p ~/.codex/skills
+
+# Symlink the entire repo under a `personal` namespace
+ln -sfn ~/claude-skills ~/.claude/skills/personal
+ln -sfn ~/claude-skills ~/.codex/skills/personal
+
+# Or cherry-pick skills individually
 ln -s ~/claude-skills/iterative-implementation ~/.claude/skills/iterative-implementation
+ln -s ~/claude-skills/iterative-implementation ~/.codex/skills/iterative-implementation
+
+ln -s ~/claude-skills/iterative-plan-review ~/.claude/skills/iterative-plan-review
+ln -s ~/claude-skills/iterative-plan-review ~/.codex/skills/iterative-plan-review
+\
 ```
