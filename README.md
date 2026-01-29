@@ -11,8 +11,8 @@ These skills are compatible with:
 
 | Skill | Description |
 |-------|-------------|
-| [iterative-plan-review](./iterative-plan-review) | Plan creation and review loop with configurable reviewer |
-| [iterative-implementation](./iterative-implementation) | Task implementation with worktrees + review |
+| [iterative-plan-review](./iterative-plan-review) | Plan creation and review loop with configurable reviewer. Example: > "/iterative-plan-review for specs/open-sourcing.md" |
+| [iterative-implementation](./iterative-implementation) | Task implementation with worktrees + review. Example: > "/iterative-implementation for @specs/open-sourcing.md with Claude as the implementer and Codex as the reviewer. Set max review iterations to 10. Auto-approve task breakdowns" |
 
 ## Installation
 ```bash
