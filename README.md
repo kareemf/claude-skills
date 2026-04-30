@@ -6,6 +6,7 @@ These skills are compatible with:
 * Codex (via the Codex skills directory)
 * Other agents that support the same [skills specification](https://developers.openai.com/codex/skills/)
 
+See https://kareemf.com/on-working-with-agentic-models-part-3
 
 ## Skills
 
@@ -23,11 +24,7 @@ git clone https://github.com/kareemf/claude-skills.git ~/claude-skills
 mkdir -p ~/.claude/skills
 mkdir -p ~/.codex/skills
 
-# Symlink the entire repo under a `personal` namespace
-ln -sfn ~/claude-skills ~/.claude/skills/personal
-ln -sfn ~/claude-skills ~/.codex/skills/personal
-
-# Or cherry-pick skills individually
+# Symlink the skills individually
 ln -s ~/claude-skills/iterative-implementation ~/.claude/skills/iterative-implementation
 ln -s ~/claude-skills/iterative-implementation ~/.codex/skills/iterative-implementation
 
